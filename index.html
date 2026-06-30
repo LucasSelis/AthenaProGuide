@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Athena Pro — Guía de Cultivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1656c9;
+  --blue-dark: #0d3d8f;
+  --blue-light: #e8f0fd;
+  --blue-mid: #4a82e0;
+  --black: #0a0d12;
+  --ink: #1a1f28;
+  --ink2: #555e6d;
+  --ink3: #9aa3b0;
+  --line: #e4e8ee;
+  --line2: #d2d8e2;
+  --white: #ffffff;
+  --bg: #fafbfc;
+  --gold: #c89b3c;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.topbar {
+  background: var(--black);
+  color: var(--white);
+  padding: 0 48px;
+  height: 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.05em;
+}
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+.topbar-dot { width: 6px; height: 6px; background: var(--blue-mid); border-radius: 50%; }
+.topbar-right { color: rgba(255,255,255,0.5); display: flex; gap: 24px; }
+
+.hero {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  padding: 56px 48px 40px;
+}
+.hero-inner { max-width: 1180px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-tag::before { content: ''; width: 24px; height: 2px; background: var(--blue); }
+.hero-title {
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 0.95;
+  color: var(--black);
+}
+.hero-title .blue { color: var(--blue); }
+.hero-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--ink3); letter-spacing: 0.05em;
+  text-align: right; line-height: 2;
+}
+.hero-meta b { color: var(--ink); font-weight: 600; }
+
+.badges-row {
+  max-width: 1180px; margin: 28px auto 0;
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.05em;
+  padding: 5px 12px; border: 1px solid var(--line2);
+  color: var(--ink2); border-radius: 3px;
+  background: var(--bg);
+}
+.badge.b { background: var(--blue-light); border-color: var(--blue); color: var(--blue-dark); font-weight: 600; }
+
+/* ── PAGE ── */
+.page { max-width: 1180px; margin: 0 auto; padding: 48px 48px 80px; }
+
+.s-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; }
+.s-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--white); background: var(--blue);
+  width: 26px; height: 26px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-weight: 600;
+}
+.s-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: var(--black); }
+.s-sub { font-size: 13px; color: var(--ink3); margin-left: auto; font-family: 'JetBrains Mono', monospace; }
+
+/* ── PROGRAM SELECTOR ── */
+.prog-card {
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: 10px; padding: 24px 28px;
+  margin-bottom: 40px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.prog-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); white-space: nowrap; }
+.prog-btns { display: flex; gap: 6px; flex: 1; min-width: 280px; }
+.prog-btn {
+  flex: 1; padding: 10px 14px; border-radius: 6px;
+  border: 1.5px solid var(--line2); background: var(--white);
+  cursor: pointer; transition: all 0.15s; text-align: center;
+}
+.prog-btn:hover { border-color: var(--blue-mid); }
+.prog-btn.active { border-color: var(--blue); background: var(--blue-light); }
+.prog-btn-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.prog-btn.active .prog-btn-name { color: var(--blue-dark); }
+.prog-btn-ec { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink3); margin-top: 2px; }
+.prog-rec-text { font-size: 13px; color: var(--ink2); flex-basis: 100%; padding-top: 8px; border-top: 1px solid var(--line); margin-top: 4px; }
+.prog-rec-text b { color: var(--blue); }
+
+/* ── SUSTRATO MIX CARD ── */
+.substrate-card {
+  background: var(--white); border: 1.5px solid var(--black);
+  border-radius: 10px; padding: 24px 28px; margin-bottom: 56px;
+}
+.sub-top { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.sub-title { font-size: 17px; font-weight: 700; }
+.sub-ratio {
+  margin-left: auto; display: flex; height: 28px; border-radius: 6px; overflow: hidden;
+  border: 1px solid var(--line2); min-width: 220px;
+}
+.sub-ratio div { display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--white); }
+.sub-turba { background: var(--ink2); flex: 7; }
+.sub-coco { background: var(--gold); flex: 3; }
+.sub-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 16px; margin-bottom: 16px; }
+.sub-item .si-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.sub-item .si-val { font-size: 14px; color: var(--ink); line-height: 1.5; }
+
+/* ── PHASE NAV ── */
+.phase-nav { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.pn-btn {
+  background: var(--white); border: 1.5px solid var(--line);
+  border-radius: 8px 8px 0 0; padding: 14px 16px;
+  cursor: pointer; transition: all 0.15s; text-align: left;
+  border-bottom: none;
+}
+.pn-btn:hover { background: var(--blue-light); }
+.pn-btn.active { background: var(--black); border-color: var(--black); }
+.pn-week { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink3); letter-spacing: 0.05em; }
+.pn-btn.active .pn-week { color: rgba(255,255,255,0.5); }
+.pn-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-top: 2px; }
+.pn-btn.active .pn-name { color: var(--white); }
+
+.phase-panels { margin-bottom: 64px; }
+.phase-panel {
+  display: none;
+  background: var(--white); border: 1.5px solid var(--black);
+  border-radius: 0 0 10px 10px; padding: 32px;
+}
+.phase-panel.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.panel-top {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line);
+}
+.panel-title { font-size: 20px; font-weight: 700; color: var(--black); flex: 1; }
+.panel-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  padding: 5px 12px; border-radius: 5px; border: 1px solid var(--line2);
+  display: flex; gap: 6px; color: var(--ink2);
+}
+.chip b { color: var(--ink); }
+.chip.blue { border-color: var(--blue); background: var(--blue-light); color: var(--blue-dark); }
+.chip.blue b { color: var(--blue-dark); }
+
+.order-row {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 24px; padding: 14px 16px;
+  background: var(--bg); border-radius: 8px; border: 1px solid var(--line);
+}
+.order-row-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3);
+  margin-right: 8px;
+}
+.ord {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--white); border: 1px solid var(--line2);
+  border-radius: 5px; padding: 5px 10px 5px 6px;
+  font-size: 12px; color: var(--ink);
+}
+.ord-n {
+  background: var(--blue); color: var(--white);
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  width: 16px; height: 16px; border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ord-arrow { color: var(--ink3); font-size: 12px; }
+
+.pgrid {
+  display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+  gap: 10px; margin-bottom: 24px;
+}
+.pcard {
+  border: 1.5px solid var(--line); border-radius: 8px;
+  padding: 16px; transition: all 0.15s; position: relative;
+}
+.pcard:hover { border-color: var(--blue-mid); transform: translateY(-1px); }
+.pcard.inactive { opacity: 0.4; }
+.ptag {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 3px; display: inline-block;
+  margin-bottom: 10px;
+}
+.ptag.polvo { background: var(--blue-light); color: var(--blue-dark); }
+.ptag.liq { background: #eef2f7; color: var(--ink2); }
+.ptag.fade { background: var(--black); color: var(--white); }
+.ptag.off { background: var(--line); color: var(--ink3); }
+.pname { font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+.pdose { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; color: var(--black); margin-bottom: 2px; }
+.pdose.blue { color: var(--blue); }
+.pdose.dim { color: var(--ink3); font-size: 24px; }
+.punit { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink3); margin-bottom: 10px; }
+.pref { font-size: 10.5px; color: var(--ink3); border-top: 1px solid var(--line); padding-top: 8px; }
+
+.note {
+  background: var(--blue-light); border-radius: 8px;
+  padding: 14px 18px; font-size: 13px; line-height: 1.65; color: var(--ink2);
+  border-left: 3px solid var(--blue);
+}
+.note b { color: var(--black); font-weight: 600; }
+.note.dark { background: var(--bg); border-left-color: var(--black); }
+.note.gold { background: #fbf6ea; border-left-color: var(--gold); }
+
+.ftgrid { display: grid; grid-template-columns: repeat(auto-fill,minmax(180px,1fr)); gap: 10px; margin: 20px 0; }
+.ft { border: 1.5px solid var(--line); border-radius: 8px; padding: 14px 16px; transition: border-color 0.15s; }
+.ft:hover { border-color: var(--blue-mid); }
+.ft.special { border-color: var(--black); background: var(--bg); }
+.ft-bank { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink3); letter-spacing: 0.07em; margin-bottom: 4px; }
+.ft.special .ft-bank { color: var(--black); font-weight: 700; }
+.ft-name { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+.ft-row { display: flex; gap: 14px; }
+.ft-stat .fsl { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink3); text-transform: uppercase; }
+.ft-stat .fsv { font-size: 13px; font-weight: 700; color: var(--blue); }
+
+.waves { border: 1.5px solid var(--line); border-radius: 8px; overflow: hidden; }
+.wave { display: flex; align-items: center; gap: 18px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.wave:last-child { border-bottom: none; }
+.wave:hover { background: var(--bg); }
+.wave-n {
+  width: 32px; height: 32px; border-radius: 7px;
+  background: var(--blue); color: var(--white);
+  font-weight: 800; font-size: 14px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.wave-body { flex: 1; }
+.wave-when { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink3); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 3px; }
+.wave-strains { font-size: 14px; font-weight: 600; }
+.wave-note { font-size: 12px; color: var(--ink2); margin-top: 2px; }
+
+.riego-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 6px; margin: 16px 0; }
+.riego-day { border-radius: 6px; padding: 12px 8px; text-align: center; border: 1.5px solid var(--line); }
+.riego-day.nutri { background: var(--blue-light); border-color: var(--blue); }
+.riego-day.agua { background: var(--bg); border-color: var(--line2); }
+.rd-name { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink3); text-transform: uppercase; margin-bottom: 6px; }
+.rd-type { font-size: 12px; font-weight: 700; }
+.riego-day.nutri .rd-type { color: var(--blue-dark); }
+.riego-day.agua .rd-type { color: var(--ink2); }
+
+.div { height: 1px; background: var(--line); margin: 64px 0; }
+
+/* ── VARIEDADES con bank badges + foto links ── */
+.bank-banner {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 20px; margin-bottom: 16px;
+  border-radius: 8px; border: 1.5px solid var(--line2);
+}
+.bank-banner.rqs { background: linear-gradient(135deg, #0a0d12 0%, #1a1f28 100%); }
+.bank-banner.pi { background: linear-gradient(135deg, #c89b3c 0%, #a87f28 100%); }
+.bank-crest {
+  width: 38px; height: 38px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 15px;
+  background: rgba(255,255,255,0.15); color: var(--white); flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.bank-text { color: var(--white); }
+.bank-text .bt-name { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+.bank-text .bt-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; opacity: 0.75; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1px; }
+.bank-count { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.85); }
+
+.var-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(250px,1fr)); gap: 12px; margin-bottom: 32px; }
+.var-card { border: 1.5px solid var(--line); border-radius: 10px; padding: 20px; transition: all 0.15s; }
+.var-card:hover { border-color: var(--blue-mid); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(22,86,201,0.08); }
+.var-name { font-size: 17px; font-weight: 700; color: var(--black); margin-bottom: 2px; }
+.var-qty { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink3); margin-bottom: 12px; }
+
+.var-cross {
+  font-size: 11px; color: var(--ink2); margin-bottom: 12px;
+  padding: 6px 10px; background: var(--bg); border-radius: 5px;
+  border-left: 2px solid var(--blue-mid);
+}
+.var-cross b { color: var(--ink); }
+
+.var-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+.var-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  padding: 3px 8px; border-radius: 4px;
+  background: var(--bg); border: 1px solid var(--line2); color: var(--ink2);
+}
+
+.var-desc { font-size: 12px; color: var(--ink2); line-height: 1.6; margin-bottom: 14px; }
+
+.var-stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
+.vsl { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink3); text-transform: uppercase; margin-bottom: 2px; }
+.vsv { font-size: 13px; font-weight: 700; color: var(--ink); }
+.vsv.blue { color: var(--blue); }
+.var-alert {
+  display: inline-block; margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  padding: 3px 9px; border-radius: 4px;
+  background: var(--black); color: var(--white);
+}
+.var-bar { height: 5px; border-radius: 3px; margin-top: 14px; display: flex; gap: 2px; overflow: hidden; }
+.var-bar span { display: block; }
+
+.var-photo-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--blue); text-decoration: none;
+}
+.var-photo-link:hover { text-decoration: underline; }
+.var-photo-link::before { content: '◆'; font-size: 8px; }
+
+/* ── SPRAY ── */
+.spray-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(190px,1fr)); gap: 10px; margin-bottom: 16px; }
+.spray-card { border: 1.5px solid var(--line); border-radius: 8px; padding: 18px; transition: border-color 0.15s; }
+.spray-card:hover { border-color: var(--blue-mid); }
+.sp-name { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+.sp-dose { font-size: 36px; font-weight: 800; color: var(--blue); line-height: 1; margin-bottom: 2px; }
+.sp-unit { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink3); margin-bottom: 10px; }
+.sp-freq { font-size: 11.5px; color: var(--ink2); border-top: 1px solid var(--line); padding-top: 10px; }
+
+.foot {
+  background: var(--black); color: rgba(255,255,255,0.6);
+  padding: 28px 48px; display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.05em;
+}
+.foot b { color: var(--white); }
+
+@media(max-width: 768px) {
+  .topbar, .hero, .page, .foot { padding-left: 20px; padding-right: 20px; }
+  .phase-nav { grid-template-columns: repeat(2,1fr); }
+  .riego-grid { grid-template-columns: repeat(4,1fr); }
+  .hero-meta { display: none; }
+  .sub-ratio { min-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left"><span class="topbar-dot"></span>ATHENA PRO PROGRAM</div>
+  <div class="topbar-right"><span>KLASSMAN TS3 + COCO-MIX</span><span>DIRECT MIX</span></div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Guía de fertilización · temporada 2025</div>
+      <div class="hero-title">Athena <span class="blue">Pro</span></div>
+    </div>
+    <div class="hero-meta">
+      10 PLANTAS · 2 BANCOS<br>
+      BIDÓN <b>6.25 L</b> · MEZCLA DIRECTA<br>
+      SUSTRATO <b>TS3 + COCO-MIX</b>
+    </div>
+  </div>
+  <div class="badges-row">
+    <span class="badge b">10 plantas</span>
+    <span class="badge">Royal Queen Seeds ×6</span>
+    <span class="badge">Pure Instinto ×4</span>
+    <span class="badge">3 oleadas de cosecha</span>
+    <span class="badge">Riego alternado</span>
+    <span class="badge">70/30 turba-coco</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 00 PROGRAMA -->
+  <div class="prog-card">
+    <div class="prog-label">Programa</div>
+    <div class="prog-btns">
+      <div class="prog-btn" onclick="setProg('light',this)">
+        <div class="prog-btn-name">Light</div>
+        <div class="prog-btn-ec">EC 1.5 / 2.0</div>
+      </div>
+      <div class="prog-btn active" onclick="setProg('normal',this)">
+        <div class="prog-btn-name">Normal</div>
+        <div class="prog-btn-ec">EC 2.0 / 2.7</div>
+      </div>
+      <div class="prog-btn" onclick="setProg('heavy',this)">
+        <div class="prog-btn-name">Heavy</div>
+        <div class="prog-btn-ec">EC 2.7 / 3.5</div>
+      </div>
+    </div>
+    <div class="prog-rec-text">Para tu mezcla TS3 + Coco-Mix: <b>Normal</b> sigue siendo la mejor opción — rendimiento alto sin perder sabor.</div>
+  </div>
+
+  <!-- SUSTRATO MIX -->
+  <div class="substrate-card">
+    <div class="sub-top">
+      <div class="sub-title">🪴 Tu sustrato: Klassman TS3 + Biobizz Coco-Mix</div>
+      <div class="sub-ratio">
+        <div class="sub-turba">70% TURBA</div>
+        <div class="sub-coco">30% COCO</div>
+      </div>
+    </div>
+    <div class="sub-grid">
+      <div class="sub-item">
+        <div class="si-label">Por qué esta proporción</div>
+        <div class="si-val">La turba aporta buffer y retención — perdona si te pasás regando. El coco suma aireación rápida a la zona radicular sin perder estabilidad de EC.</div>
+      </div>
+      <div class="sub-item">
+        <div class="si-label">pH objetivo</div>
+        <div class="si-val">Igual que turba pura: <b>5.8–6.2</b> en veg/flor, <b>6.0–6.4</b> en fade/flush.</div>
+      </div>
+      <div class="sub-item">
+        <div class="si-label">Antes de fertilizar</div>
+        <div class="si-val">Medí el EC del sustrato húmedo solo con agua — el Coco-Mix de Biobizz trae pre-carga orgánica (guano, algas) que puede sumar EC inicial.</div>
+      </div>
+    </div>
+    <div class="note gold" style="margin:0">El Coco-Mix no es coco lavado puro — viene con nutrición orgánica de base. Si tu EC inicial (solo agua) da por encima de 0.4–0.5, arrancá la primera semana de veg con dosis reducida para no sumar de más.</div>
+  </div>
+
+  <!-- 01 MEZCLA -->
+  <section>
+    <div class="s-head">
+      <div class="s-num">1</div>
+      <div class="s-title">La mezcla</div>
+      <div class="s-sub">gramos y mL por bidón de 6.25 L</div>
+    </div>
+
+    <div class="phase-nav">
+      <div class="pn-btn active" onclick="setPhase('veg',this)"><div class="pn-week">W1–W4</div><div class="pn-name">Vegetativo</div></div>
+      <div class="pn-btn" onclick="setPhase('flor',this)"><div class="pn-week">W1–W7</div><div class="pn-name">Floración</div></div>
+      <div class="pn-btn" onclick="setPhase('fade',this)"><div class="pn-week">W8–W11</div><div class="pn-name">Fade</div></div>
+      <div class="pn-btn" onclick="setPhase('flush',this)"><div class="pn-week">3 días</div><div class="pn-name">Flush</div></div>
+    </div>
+
+    <div class="phase-panels">
+
+      <!-- VEG -->
+      <div id="pp-veg" class="phase-panel active">
+        <div class="panel-top">
+          <div class="panel-title">Vegetativo — W1 a W4</div>
+          <div class="panel-chips">
+            <div class="chip blue">EC <b id="veg-ec">2.0</b></div>
+            <div class="chip">pH <b>5.8–6.2</b></div>
+            <div class="chip">PPM500 <b id="veg-ppm">1000</b></div>
+          </div>
+        </div>
+        <div class="order-row">
+          <span class="order-row-label">Orden</span>
+          <div class="ord"><span class="ord-n">1</span>Agua 6.25L</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">2</span>pH Down (a 6.5)</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">3</span>Pro Core</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">4</span>Pro Grow</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">5</span>Cleanse</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">6</span>Balance (afinar)</div>
+        </div>
+        <div class="pgrid">
+          <div class="pcard"><div class="ptag polvo">polvo</div><div class="pname">Pro Core</div><div class="pdose" id="veg-core">5.0</div><div class="punit">gramos</div><div class="pref">ref. 8.0g / 10L</div></div>
+          <div class="pcard"><div class="ptag polvo">polvo</div><div class="pname">Pro Grow</div><div class="pdose" id="veg-grow">8.25</div><div class="punit">gramos</div><div class="pref">ref. 13.2g / 10L</div></div>
+          <div class="pcard"><div class="ptag liq">líquido</div><div class="pname">Cleanse</div><div class="pdose blue">3.1</div><div class="punit">mililitros</div><div class="pref">ref. 5mL / 10L</div></div>
+          <div class="pcard"><div class="ptag liq">líquido</div><div class="pname">pH Down</div><div class="pdose blue">—</div><div class="punit">hasta pH 6.5</div><div class="pref">según tu agua (7.2)</div></div>
+          <div class="pcard"><div class="ptag liq">líquido</div><div class="pname">Balance (pH up)</div><div class="pdose blue">—</div><div class="punit">afinar si baja de más</div><div class="pref">corrección fina</div></div>
+          <div class="pcard inactive"><div class="ptag off">no usar</div><div class="pname">Pro Bloom</div><div class="pdose dim">—</div><div class="punit">solo en floración</div><div class="pref">—</div></div>
+        </div>
+        <div class="note"><b>Semana 1:</b> mitad de dosis (Core 2.5g / Grow 4g) — más todavía si tu EC base del sustrato (con Coco-Mix) ya viene alta. Subís a dosis normal en W2. Kali Dog y Mimosa estiran mucho: si tenés altura disponible, dales 1 semana extra.</div>
+      </div>
+
+      <!-- FLOR -->
+      <div id="pp-flor" class="phase-panel">
+        <div class="panel-top">
+          <div class="panel-title">Floración — W1 a W7</div>
+          <div class="panel-chips">
+            <div class="chip blue">EC <b id="flor-ec">2.7</b></div>
+            <div class="chip">pH <b>5.8–6.2</b></div>
+            <div class="chip">PPM500 <b id="flor-ppm">1350</b></div>
+          </div>
+        </div>
+        <div class="order-row">
+          <span class="order-row-label">Orden</span>
+          <div class="ord"><span class="ord-n">1</span>Agua 6.25L</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">2</span>pH Down (a 6.5)</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">3</span>Pro Core</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">4</span>Pro Bloom</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">5</span>Cleanse</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">6</span>Balance (afinar)</div>
+        </div>
+        <div class="pgrid">
+          <div class="pcard"><div class="ptag polvo">polvo</div><div class="pname">Pro Core</div><div class="pdose" id="flor-core">6.6</div><div class="punit">gramos</div><div class="pref">ref. 10.6g / 10L</div></div>
+          <div class="pcard"><div class="ptag polvo">polvo</div><div class="pname">Pro Bloom</div><div class="pdose" id="flor-bloom">11.1</div><div class="punit">gramos</div><div class="pref">ref. 17.8g / 10L</div></div>
+          <div class="pcard"><div class="ptag liq">líquido</div><div class="pname">Cleanse</div><div class="pdose blue">3.1</div><div class="punit">mililitros</div><div class="pref">ref. 5mL / 10L</div></div>
+          <div class="pcard"><div class="ptag liq">líquido</div><div class="pname">pH Down</div><div class="pdose blue">—</div><div class="punit">hasta pH 6.5</div><div class="pref">según tu agua (7.2)</div></div>
+          <div class="pcard"><div class="ptag liq">líquido</div><div class="pname">Balance (pH up)</div><div class="pdose blue">—</div><div class="punit">afinar si baja de más</div><div class="pref">corrección fina</div></div>
+          <div class="pcard inactive"><div class="ptag off">no usar</div><div class="pname">Pro Grow</div><div class="pdose dim">—</div><div class="punit">solo en vegetativo</div><div class="pref">—</div></div>
+        </div>
+        <div class="note"><b>Cambio veg → flor:</b> sacás el Grow, ponés Bloom. El Core sube de 5g a 6.6g. En W6–W7 empezá a mirar tricomas con lupa.</div>
+      </div>
+
+      <!-- FADE -->
+      <div id="pp-fade" class="phase-panel">
+        <div class="panel-top">
+          <div class="panel-title">Fade — según variedad</div>
+          <div class="panel-chips">
+            <div class="chip blue">EC <b>~2.0</b></div>
+            <div class="chip">pH ↑ <b>6.0–6.4</b></div>
+          </div>
+        </div>
+        <div class="order-row">
+          <span class="order-row-label">Orden</span>
+          <div class="ord"><span class="ord-n">1</span>Agua 6.25L</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">2</span>pH Down (a 6.7)</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">3</span>Bloom ½ dosis</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">4</span>Fade</div>
+          <span class="ord-arrow">→</span>
+          <div class="ord"><span class="ord-n">5</span>Cleanse</div>
+        </div>
+        <div class="pgrid">
+          <div class="pcard inactive"><div class="ptag off">eliminar</div><div class="pname">Pro Core</div><div class="pdose dim">—</div><div class="punit">reemplazado por Fade</div><div class="pref">—</div></div>
+          <div class="pcard"><div class="ptag polvo">polvo</div><div class="pname">Pro Bloom</div><div class="pdose blue">4.1</div><div class="punit">gramos (½ dosis)</div><div class="pref">ref. 6.6g / 10L</div></div>
+          <div class="pcard"><div class="ptag fade">fade</div><div class="pname">Fade</div><div class="pdose">3–4</div><div class="punit">mililitros</div><div class="pref">estimado mezcla directa</div></div>
+          <div class="pcard"><div class="ptag liq">líquido</div><div class="pname">Cleanse</div><div class="pdose blue">3.1</div><div class="punit">mililitros</div><div class="pref">ref. 5mL / 10L</div></div>
+        </div>
+
+        <div class="ftgrid">
+          <div class="ft"><div class="ft-bank">RQS · ×3</div><div class="ft-name">Northern Lights</div><div class="ft-row"><div class="ft-stat"><div class="fsl">FADE</div><div class="fsv">W8</div></div><div class="ft-stat"><div class="fsl">CORTE</div><div class="fsv">fin W8</div></div></div></div>
+          <div class="ft"><div class="ft-bank">RQS · ×1</div><div class="ft-name">Fruit Spirit</div><div class="ft-row"><div class="ft-stat"><div class="fsl">FADE</div><div class="fsv">W8</div></div><div class="ft-stat"><div class="fsl">CORTE</div><div class="fsv">fin W8</div></div></div></div>
+          <div class="ft"><div class="ft-bank">RQS · ×2</div><div class="ft-name">Kali Dog</div><div class="ft-row"><div class="ft-stat"><div class="fsl">FADE</div><div class="fsv">W8–W9</div></div><div class="ft-stat"><div class="fsl">CORTE</div><div class="fsv">fin W9–W10</div></div></div></div>
+          <div class="ft"><div class="ft-bank">PI · ×4</div><div class="ft-name">Forbidden Fruit Cake</div><div class="ft-row"><div class="ft-stat"><div class="fsl">FADE</div><div class="fsv">W8–W9</div></div><div class="ft-stat"><div class="fsl">CORTE</div><div class="fsv">fin W9</div></div></div></div>
+          <div class="ft"><div class="ft-bank">PI · ×1</div><div class="ft-name">Watermelon Zkittlez</div><div class="ft-row"><div class="ft-stat"><div class="fsl">FADE</div><div class="fsv">W8–W9</div></div><div class="ft-stat"><div class="fsl">CORTE</div><div class="fsv">fin W9</div></div></div></div>
+          <div class="ft special"><div class="ft-bank">PI · ×1 — LA MÁS LARGA</div><div class="ft-name">Mimosa</div><div class="ft-row"><div class="ft-stat"><div class="fsl">FADE</div><div class="fsv">W9–W11</div></div><div class="ft-stat"><div class="fsl">CORTE</div><div class="fsv">W10–W11</div></div></div></div>
+        </div>
+
+        <div class="waves">
+          <div class="wave"><div class="wave-n">I</div><div class="wave-body"><div class="wave-when">Fin semana 8</div><div class="wave-strains">Northern Lights ×3 · Fruit Spirit ×1</div><div class="wave-note">Royal Queen Seeds — 8 semanas</div></div></div>
+          <div class="wave"><div class="wave-n">II</div><div class="wave-body"><div class="wave-when">Fin semana 9–10</div><div class="wave-strains">Kali Dog ×2 · Forbidden Fruit Cake ×4 · Watermelon Zkittlez ×1</div><div class="wave-note">La mayoría del grow — confirmar por tricomas</div></div></div>
+          <div class="wave"><div class="wave-n">III</div><div class="wave-body"><div class="wave-when">Fin semana 10–11</div><div class="wave-strains">Mimosa ×1</div><div class="wave-note">La última del grow</div></div></div>
+        </div>
+
+        <div class="note" style="margin-top:16px"><b>Señal de Fade correcto:</b> amarillamiento suave y progresivo de hojas viejas. El pH sube a 6.0–6.4 al entrar en esta fase.</div>
+      </div>
+
+      <!-- FLUSH -->
+      <div id="pp-flush" class="phase-panel">
+        <div class="panel-top">
+          <div class="panel-title">Flush final — últimos 3 días</div>
+          <div class="panel-chips">
+            <div class="chip blue">EC <b>&lt;50 PPM</b></div>
+            <div class="chip">pH <b>6.0–6.4</b></div>
+          </div>
+        </div>
+        <div class="pgrid">
+          <div class="pcard"><div class="ptag liq">líquido</div><div class="pname">Cleanse</div><div class="pdose blue">15.6</div><div class="punit">mililitros</div><div class="pref">ref. 25mL / 10L</div></div>
+          <div class="pcard inactive"><div class="ptag off">cero</div><div class="pname">Core/Bloom/Fade</div><div class="pdose dim">—</div><div class="punit">ningún nutriente</div><div class="pref">—</div></div>
+        </div>
+        <div class="note dark"><b>Con coco en la mezcla, el flush puede ser un poco más generoso</b> que en turba pura — el coco libera sales más fácil. Igual arrancá con 3 días y ajustá si ves acumulación. Hacé el flush por planta según su propio timing.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RIEGO ALTERNADO -->
+  <section>
+    <div class="s-head">
+      <div class="s-num">2</div>
+      <div class="s-title">Riego alternado</div>
+      <div class="s-sub">nutrientes + agua pura</div>
+    </div>
+    <div class="note" style="margin-bottom:0">Alterná <b>2 riegos con nutrientes por cada 1 riego solo con agua</b> (pH ajustado, sin nada más). Con coco en la mezcla esto es aún más importante porque drena más rápido y puede acumular sales si regás siempre con nutrientes.</div>
+    <div class="riego-grid">
+      <div class="riego-day nutri"><div class="rd-name">Lun</div><div class="rd-type">Nutri</div></div>
+      <div class="riego-day agua"><div class="rd-name">Mar</div><div class="rd-type">—</div></div>
+      <div class="riego-day agua"><div class="rd-name">Mié</div><div class="rd-type">Agua</div></div>
+      <div class="riego-day agua"><div class="rd-name">Jue</div><div class="rd-type">—</div></div>
+      <div class="riego-day nutri"><div class="rd-name">Vie</div><div class="rd-type">Nutri</div></div>
+      <div class="riego-day agua"><div class="rd-name">Sáb</div><div class="rd-type">—</div></div>
+      <div class="riego-day agua"><div class="rd-name">Dom</div><div class="rd-type">Agua</div></div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- VARIEDADES -->
+  <section>
+    <div class="s-head">
+      <div class="s-num">3</div>
+      <div class="s-title">Las plantas</div>
+      <div class="s-sub">10 plantas · 2 bancos</div>
+    </div>
+
+    <!-- RQS -->
+    <div class="bank-banner rqs">
+      <div class="bank-crest">RQS</div>
+      <div class="bank-text">
+        <div class="bt-name">Royal Queen Seeds</div>
+        <div class="bt-tag">Barcelona · desde 2007</div>
+      </div>
+      <div class="bank-count">6 plantas</div>
+    </div>
+    <div class="var-grid">
+
+      <div class="var-card">
+        <div class="var-name">Northern Lights</div>
+        <div class="var-qty">×3 plantas</div>
+        <div class="var-tags"><span class="var-tag">índica pura</span><span class="var-tag">clásica 90s</span></div>
+        <div class="var-desc">Una de las índicas más legendarias del mercado. Efecto corporal profundo y relajante, perfil dulce-terroso con notas de pino. Estructura compacta, ideal para growers que buscan algo predecible y resistente.</div>
+        <div class="var-stats">
+          <div><div class="vsl">Floración</div><div class="vsv">8 sem</div></div>
+          <div><div class="vsl">Fade</div><div class="vsv blue">W8</div></div>
+          <div><div class="vsl">Corte</div><div class="vsv">fin W8</div></div>
+        </div>
+        <div class="var-bar"><span style="flex:4;background:#1656c9"></span><span style="flex:7;background:#1656c9;opacity:0.5"></span><span style="flex:1;background:#0a0d12"></span><span style="flex:0.4;background:#9aa3b0"></span></div>
+        <a class="var-photo-link" href="https://www.royalqueenseeds.com/es/feminizadas-semillas-de-marihuana/19-northern-light.html" target="_blank">Ver fotos en RQS oficial</a>
+      </div>
+
+      <div class="var-card">
+        <div class="var-name">Fruit Spirit</div>
+        <div class="var-qty">×1 planta</div>
+        <div class="var-tags"><span class="var-tag">índica dominante</span><span class="var-tag">frutal</span></div>
+        <div class="var-desc">Genética frutal con dulzor intenso y un efecto relajante sin ser narcótico. Buena producción de resina, cogollos compactos.</div>
+        <div class="var-stats">
+          <div><div class="vsl">Floración</div><div class="vsv">8 sem</div></div>
+          <div><div class="vsl">Fade</div><div class="vsv blue">W8</div></div>
+          <div><div class="vsl">Corte</div><div class="vsv">fin W8</div></div>
+        </div>
+        <div class="var-bar"><span style="flex:4;background:#1656c9"></span><span style="flex:7;background:#1656c9;opacity:0.5"></span><span style="flex:1;background:#0a0d12"></span><span style="flex:0.4;background:#9aa3b0"></span></div>
+        <a class="var-photo-link" href="https://www.royalqueenseeds.com/es/" target="_blank">Ver fotos en RQS oficial</a>
+      </div>
+
+      <div class="var-card">
+        <div class="var-name">Kali Dog</div>
+        <div class="var-qty">×2 plantas</div>
+        <div class="var-cross">Cruce: <b>Chemdawg × Sour Diesel</b></div>
+        <div class="var-tags"><span class="var-tag">sativa dominante</span><span class="var-tag">THC ~18%</span><span class="var-tag">glotona</span></div>
+        <div class="var-desc">Efecto cerebral estimulante seguido de relajación corporal profunda. Aroma cítrico-terroso con notas diésel intensas. Es "glotona" — absorbe bien nutrientes fuertes — pero atenta con la humedad por sus cogollos densos, propensa a moho.</div>
+        <div class="var-stats">
+          <div><div class="vsl">Floración</div><div class="vsv">9–10 sem</div></div>
+          <div><div class="vsl">Fade</div><div class="vsv blue">W8–W9</div></div>
+          <div><div class="vsl">Corte</div><div class="vsv">fin W9–W10</div></div>
+        </div>
+        <div class="var-bar"><span style="flex:4;background:#1656c9"></span><span style="flex:7;background:#1656c9;opacity:0.5"></span><span style="flex:2;background:#0a0d12"></span><span style="flex:0.4;background:#9aa3b0"></span></div>
+        <a class="var-photo-link" href="https://www.royalqueenseeds.com/es/semillas-feminizadas-de-marihuana/183-kali-dog.html" target="_blank">Ver fotos en RQS oficial</a>
+      </div>
+    </div>
+
+    <!-- PI -->
+    <div class="bank-banner pi">
+      <div class="bank-crest">PI</div>
+      <div class="bank-text">
+        <div class="bt-name">Pure Instinto</div>
+        <div class="bt-tag">Genética americana premium</div>
+      </div>
+      <div class="bank-count">4 plantas</div>
+    </div>
+    <div class="var-grid">
+
+      <div class="var-card">
+        <div class="var-name">Forbidden Fruit Cake</div>
+        <div class="var-qty">×4 plantas</div>
+        <div class="var-cross">Cruce: <b>Forbidden Fruit × Wedding Cake</b></div>
+        <div class="var-tags"><span class="var-tag">índica dominante</span><span class="var-tag">THC 24–27%</span><span class="var-tag">muy resinosa</span></div>
+        <div class="var-desc">Aromas a frutos del bosque, cereza y vainilla con fondo de hachís almizclado. Subidón eufórico inicial que da paso a relajación corporal profunda. Cogollos con tonos verde bosque, rosa y violeta — tricomas espesos.</div>
+        <div class="var-stats">
+          <div><div class="vsl">Floración</div><div class="vsv">8–9 sem</div></div>
+          <div><div class="vsl">Fade</div><div class="vsv blue">W8–W9</div></div>
+          <div><div class="vsl">Corte</div><div class="vsv">fin W9</div></div>
+        </div>
+        <div class="var-bar"><span style="flex:4;background:#1656c9"></span><span style="flex:7;background:#1656c9;opacity:0.5"></span><span style="flex:2;background:#0a0d12"></span><span style="flex:0.4;background:#9aa3b0"></span></div>
+        <a class="var-photo-link" href="https://pureinstinto.com/es/product/forbidden-fruit-cake-feminized-cannabis-seeds/" target="_blank">Ver fotos en Pure Instinto oficial</a>
+      </div>
+
+      <div class="var-card">
+        <div class="var-name">Watermelon Zkittlez</div>
+        <div class="var-qty">×1 planta</div>
+        <div class="var-cross">Cruce: <b>Zkittlez × Watermelon</b></div>
+        <div class="var-tags"><span class="var-tag">índica dominante</span><span class="var-tag">THC 25%+</span><span class="var-tag">sandía</span></div>
+        <div class="var-desc">Sabor dulce, cítrico y a sandía con un toque ácido al quemar. Euforia cerebral alegre que da paso a relajación corporal profunda — ideal para ansiedad y estrés.</div>
+        <div class="var-stats">
+          <div><div class="vsl">Floración</div><div class="vsv">9 sem</div></div>
+          <div><div class="vsl">Fade</div><div class="vsv blue">W8–W9</div></div>
+          <div><div class="vsl">Corte</div><div class="vsv">fin W9</div></div>
+        </div>
+        <div class="var-bar"><span style="flex:4;background:#1656c9"></span><span style="flex:7;background:#1656c9;opacity:0.5"></span><span style="flex:2;background:#0a0d12"></span><span style="flex:0.4;background:#9aa3b0"></span></div>
+        <a class="var-photo-link" href="https://pureinstinto.com/es/product/watermelon-zkittles-feminized-cannabis-seeds/" target="_blank">Ver fotos en Pure Instinto oficial</a>
+      </div>
+
+      <div class="var-card">
+        <div class="var-name">Mimosa</div>
+        <div class="var-qty">×1 planta</div>
+        <div class="var-cross">Cruce: <b>Purple Punch × Clementine</b></div>
+        <div class="var-tags"><span class="var-tag">sativa dominante</span><span class="var-tag">THC 19–27%</span><span class="var-tag">para el día</span></div>
+        <div class="var-desc">Sabor a naranja azucarada con notas de pino y hierbas. Efecto eufórico, energizante y motivador, ideal para uso diurno — "wake and bake". Cogollos densos color verde oliva con matices púrpura, gran capa de tricomas.</div>
+        <div class="var-alert">★ la más larga</div>
+        <div class="var-stats" style="margin-top:10px">
+          <div><div class="vsl">Floración</div><div class="vsv blue">10–11 sem</div></div>
+          <div><div class="vsl">Fade</div><div class="vsv blue">W9–W11</div></div>
+          <div><div class="vsl">Corte</div><div class="vsv blue">W10–W11</div></div>
+        </div>
+        <div class="var-bar"><span style="flex:4;background:#1656c9"></span><span style="flex:7;background:#1656c9;opacity:0.5"></span><span style="flex:3;background:#0a0d12"></span><span style="flex:0.4;background:#9aa3b0"></span></div>
+        <a class="var-photo-link" href="https://pureinstinto.com/es/" target="_blank">Ver fotos en Pure Instinto oficial</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- SPRAY -->
+  <section>
+    <div class="s-head">
+      <div class="s-num">4</div>
+      <div class="s-title">Foliar IPM</div>
+      <div class="s-sub">mL por litro de agua</div>
+    </div>
+    <div class="spray-grid">
+      <div class="spray-card"><div class="sp-name">IPM Preventativo</div><div class="sp-dose">24</div><div class="sp-unit">mL/L</div><div class="sp-freq">2× semana · Veg + Flor W1–W3</div></div>
+      <div class="spray-card"><div class="sp-name">IPM Presión</div><div class="sp-dose">32</div><div class="sp-unit">mL/L</div><div class="sp-freq">3× semana si hay plaga activa</div></div>
+      <div class="spray-card"><div class="sp-name">Stack Maximize</div><div class="sp-dose">2</div><div class="sp-unit">mL/L</div><div class="sp-freq">2× semana — mezclar con IPM</div></div>
+    </div>
+    <div class="note">IPM + Stack se mezclan juntos. Parar foliar después de flor W3–W4. Kali Dog y NL son sensibles a hongos por sus cogollos densos.</div>
+  </section>
+
+</div>
+
+<div class="foot">
+  <div><b>Athena Pro</b> · 10 plantas · RQS &amp; Pure Instinto · TS3 + Coco-Mix 70/30 · 6.25L</div>
+  <div>POLVOS EN GRAMOS · LÍQUIDOS EN mL</div>
+</div>
+
+<script>
+const progs = {
+  light:  { vegEC:'1.5', vegPPM:'750',  florEC:'2.0', florPPM:'1000', vegCore:'3.6',  vegGrow:'5.9',  florCore:'5.0',  florBloom:'8.25' },
+  normal: { vegEC:'2.0', vegPPM:'1000', florEC:'2.7', florPPM:'1350', vegCore:'5.0',  vegGrow:'8.25', florCore:'6.6',  florBloom:'11.1' },
+  heavy:  { vegEC:'2.7', vegPPM:'1350', florEC:'3.5', florPPM:'1750', vegCore:'6.6',  vegGrow:'10.9', florCore:'8.75', florBloom:'14.6' }
+};
+function setProg(p, btn) {
+  document.querySelectorAll('.prog-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const d = progs[p];
+  document.getElementById('veg-ec').textContent = d.vegEC;
+  document.getElementById('veg-ppm').textContent = d.vegPPM;
+  document.getElementById('flor-ec').textContent = d.florEC;
+  document.getElementById('flor-ppm').textContent = d.florPPM;
+  document.getElementById('veg-core').textContent = d.vegCore;
+  document.getElementById('veg-grow').textContent = d.vegGrow;
+  document.getElementById('flor-core').textContent = d.florCore;
+  document.getElementById('flor-bloom').textContent = d.florBloom;
+}
+function setPhase(phase, btn) {
+  document.querySelectorAll('.phase-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.pn-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('pp-' + phase).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
